@@ -11,9 +11,28 @@ module mux2_1(InA, InB, S, Out);
 
    wire     NotS, MaxA, MaxB;
    
-   not1 i(S, NotS);
-   nand2 j(NotS, InA, MaxA);
-   nand2 k(S, InB, MaxB);
-   nand2 l(MaxA, MaxB, Out);
+   not1 i(
+	  // Outputs
+	  .out				(NotS),
+	  // Inputs
+	  .in1				(S));
+   nand2 j(
+	   // Inputs
+	   .in1                         (NotS),
+	   .in2                         (InA),
+	   // Outputs
+	   .out                         (MaxA));
+   nand2 k(
+	   // Inputs
+	   .in1                         (S),
+	   .in2                         (InB),
+	   // Outputs
+	   .out                         (MaxB));
+   nand2 l(
+	   // Inputs
+	   .in1                         (MaxA),
+	   .in2                         (MaxB),
+	   // Outputs
+	   .out                         (Out));
       
 endmodule

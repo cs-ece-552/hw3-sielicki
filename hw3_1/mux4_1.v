@@ -12,8 +12,26 @@ module mux4_1(InA, InB, InC, InD, S, Out);
 
    wire 	 m1, m2;
 
-   mux2_1 a(InA, InB, S[0], m1);
-   mux2_1 b(InC, InD, S[0], m2);
-   mux2_1 c(m1, m2, S[1], Out);
+   mux2_1 a(
+	    // Outputs
+	    .Out			(m1),
+	    // Inputs
+	    .InA			(InA),
+	    .InB			(InB),
+	    .S				(S[0]));
+   mux2_1 b(
+	    // Outputs
+	    .Out			(m2),
+	    // Inputs
+	    .InA			(InC),
+	    .InB			(InD),
+	    .S				(S[0]));
+   mux2_1 c(
+	    // Outputs
+	    .Out			(Out),
+	    // Inputs
+	    .InA			(m1),
+	    .InB			(m2),
+	    .S				(S[1]));
    
 endmodule
